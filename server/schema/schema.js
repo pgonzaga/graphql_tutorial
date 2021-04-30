@@ -1,7 +1,7 @@
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLBoolean, GraphQLSchema } = graphql;
 
-const VehicleType = GraphQlObjectType({
+const VehicleType = new GraphQLObjectType({
   name: 'Vehicle',
   fields: () => ({
     id: { type: GraphQLString },
@@ -41,4 +41,21 @@ const VehicleType = GraphQlObjectType({
     trim: { type: GraphQLString },
     vehicle_acquisition_price_cents: { type: GraphQLInt },
   })
+});
+
+const RootQuery = new GraphQLObjectType({
+  name: 'RootQueryType',
+  fields: {
+    vehicle: {
+      type: VehicleType,
+      args: { id: { type: GraphQLString } },
+      resolve(parent, args) {
+        //code to get data from api
+      }
+    }
+  }
+});
+
+module.exports = new GraphQLSchema({
+  query: RootQuery
 });

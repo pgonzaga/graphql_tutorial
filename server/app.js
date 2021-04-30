@@ -1,8 +1,9 @@
 const Koa = require('koa');
+const mount = require('koa-mount');
+const graphqlHTTP = require('koa-graphql');
 const app = new Koa();
 
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
+app.use(mount('/graphql', graphqlHTTP({
+})));
 
 app.listen(4000);

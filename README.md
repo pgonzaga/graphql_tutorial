@@ -1,1 +1,1 @@
-# graphql_tutorial
+# Apollo tutorial
